@@ -27,7 +27,7 @@ impl CanvasPainter {
         }
     }
 
-    pub fn paint(&self, graphics_primitives: Vec<GraphicsPrimitive>) {
+    pub fn paint(&self, graphics_primitives: &Vec<GraphicsPrimitive>) {
         for gp in graphics_primitives.iter() {
             match gp {
                 GraphicsPrimitive::Rectangle { data } => {
