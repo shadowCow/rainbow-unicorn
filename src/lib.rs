@@ -74,6 +74,7 @@ impl CanvasPainter {
                     for p in points.iter() {
                         self.context.line_to(p.x as f64, p.y as f64);
                     }
+                    self.context.line_to(points[0].x as f64, points[0].y as f64);
 
                     // need to switch on this later based on specified styles
                     self.context.stroke();
