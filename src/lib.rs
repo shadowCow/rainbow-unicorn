@@ -59,13 +59,12 @@ impl CanvasPainter {
                     );
                 }
                 GraphicsPrimitive::Text { data } => {
-                    // TODO - this
-                    // self.context.font = data.font;
-                    // self.context.fill_text(
-                    //     data.text,
-                    //     data.x as f64,
-                    //     data.y as f64
-                    // );
+                    self.context.set_font(data.font);
+                    self.context.fill_text(
+                        data.text,
+                        data.x as f64,
+                        data.y as f64
+                    );
                 }
                 GraphicsPrimitive::Polygon { points } => {
                     self.context.begin_path();
@@ -139,11 +138,11 @@ impl CanvasPainter {
 }
 
 #[derive(PartialEq, Debug)]
-pub enum GraphicsPrimitive {
+pub enum GraphicsPrimitive<'a> {
     Rectangle { data: RectangleData },
     Line { data: LineData },
     Ellipse { data: EllipseData },
-    Text { data: TextData },
+    Text { data: TextData<'a> },
     Polygon { points: Vec<Point> },
     RuPath { data: PathData }
 }
@@ -175,11 +174,11 @@ pub struct EllipseData {
 }
 
 #[derive(PartialEq, Debug)]
-pub struct TextData {
+pub struct TextData<'a> {
     pub x: u32,
     pub y: u32,
-    pub text: String,
-    pub font: String,
+    pub text: &'a str,
+    pub font: &'a str,
 }
 
 #[derive(PartialEq, Debug)]
@@ -244,8 +243,8 @@ mod tests {
         GraphicsPrimitive::Text { data: TextData {
             x: 900,
             y: 1000,
-            text: "Hello".to_string(),
-            font: "Dialog".to_string()
+            text: "Hello",
+            font: "Dialog"
         }};
     }
 
