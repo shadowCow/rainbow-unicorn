@@ -3,7 +3,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
 
-mod primitives;
+pub mod primitives;
 use primitives::*;
 
 pub struct CanvasPainter {
