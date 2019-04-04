@@ -127,7 +127,7 @@ impl CanvasPainter {
         context.quadratic_curve_to(
             data.left as f64,
             data.top as f64,
-            (data.top + data.rx) as f64,
+            (data.left + data.rx) as f64,
             data.top as f64
         );
 
