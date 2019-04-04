@@ -32,6 +32,7 @@ impl CanvasPainter {
     }
 
     pub fn paint(&self, graphics_primitives: &Vec<GraphicsPrimitive>) {
+        self.context.clear_rect(0.0, 0.0, self.context.canvas().unwrap().width() as f64, self.context.canvas().unwrap().height() as f64);
         for gp in graphics_primitives.iter() {
             match gp {
                 GraphicsPrimitive::Rectangle { data, styles } => {
