@@ -9,7 +9,7 @@ pub enum GraphicsPrimitive {
     RuPath { data: PathData, styles: Styles }
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub struct RectangleData {
     pub left: u32,
     pub top: u32,
@@ -19,7 +19,7 @@ pub struct RectangleData {
     pub ry: u32,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub struct LineData {
     pub x1: u32,
     pub y1: u32,
@@ -27,7 +27,7 @@ pub struct LineData {
     pub y2: u32,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub struct EllipseData {
     pub cx: u32,
     pub cy: u32,
@@ -35,7 +35,7 @@ pub struct EllipseData {
     pub ry: u32,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Clone)]
 pub struct TextData {
     pub x: u32,
     pub y: u32,
@@ -43,13 +43,13 @@ pub struct TextData {
     pub font: String,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub struct Point {
     pub x: u32,
     pub y: u32,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub enum PathSegment {
     MoveTo { to_x: u32, to_y: u32 },
     LineTo { to_x: u32, to_y: u32 },
@@ -57,20 +57,20 @@ pub enum PathSegment {
     QuadraticCurveTo { cp_x: u32, cp_y: u32, to_x: u32, to_y: u32 }
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Clone)]
 pub struct PathData {
     pub start_x: u32,
     pub start_y: u32,
     pub segments: Vec<PathSegment>,
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Clone)]
 pub enum Styles {
     Fill { color: String },
     Stroke { color: String, width: u32 }
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Transform {
     Translate { x: i32, y: i32 },
     Rotate { a: i32, x: i32, y: i32 },
