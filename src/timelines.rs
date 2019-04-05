@@ -1,6 +1,6 @@
 use std::cmp;
 
-fn oscillating_proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
+pub fn oscillating_proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
     let proportion = repeating_proportion(elapsed_time_millis, time_period_millis);
     let phase = (elapsed_time_millis / time_period_millis) as u64 % 2;
 
@@ -11,13 +11,13 @@ fn oscillating_proportion(elapsed_time_millis: f64, time_period_millis: f64) -> 
     }
 }
 
-fn repeating_proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
+pub fn repeating_proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
     let remainder = (elapsed_time_millis as u64) % time_period_millis as u64;
     
     remainder as f64 / time_period_millis
 }
 
-fn proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
+pub fn proportion(elapsed_time_millis: f64, time_period_millis: f64) -> f64 {
     let quotient = elapsed_time_millis / time_period_millis;
     if quotient > 1.0 {
         1.0
