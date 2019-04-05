@@ -6,7 +6,7 @@ use primitives::*;
 pub mod timelines;
 use timelines::*;
 
-trait Painter {
+pub trait Painter {
     fn clear(&self);
     fn draw_rect(&self, data: &RectangleData, styles: &Styles);
     fn draw_line(&self, data: &LineData, styles: &Styles);
@@ -42,11 +42,11 @@ fn paint<T: Painter>(painter: T, graphics_primitives: &Vec<GraphicsPrimitive>) {
     }
 }
 
-trait StateContainer {
+pub trait StateContainer {
     fn update(&self, timestamp_millis: f64) -> Vec<GraphicsPrimitive>;
 }
 
-fn tick<T: StateContainer, P: Painter>(
+pub fn tick<T: StateContainer, P: Painter>(
     timestamp_millis: f64,
     state_container: T,
     painter: P
