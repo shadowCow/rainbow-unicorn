@@ -16,7 +16,7 @@ pub trait Painter {
     fn draw_path(&self, data: &PathData, styles: &Styles);
 }
 
-fn paint<T: Painter>(painter: T, graphics_primitives: &Vec<GraphicsPrimitive>) {
+fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GraphicsPrimitive>) {
     painter.clear();
     for gp in graphics_primitives.iter() {
         match gp {
@@ -48,8 +48,8 @@ pub trait StateContainer {
 
 pub fn tick<T: StateContainer, P: Painter>(
     timestamp_millis: f64,
-    state_container: T,
-    painter: P
+    state_container: &T,
+    painter: &P
 ) {
     let new_primitives = state_container.update(timestamp_millis);
     paint(painter, &new_primitives);
@@ -87,6 +87,6 @@ mod tests {
 
         let timestamp_millis = 0.0;
 
-        tick(timestamp_millis, mock_state_container, mock_painter);
+        tick(timestamp_millis, &mock_state_container, &mock_painter);
     }
 }
