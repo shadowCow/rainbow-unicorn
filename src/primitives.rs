@@ -1,6 +1,6 @@
 
 #[derive(PartialEq, Debug)]
-pub enum GraphicsPrimitive {
+pub enum GeometricPrimitive {
     Rectangle { data: RectangleData, styles: Styles },
     Line { data: LineData, styles: Styles },
     Ellipse { data: EllipseData, styles: Styles },
@@ -84,7 +84,7 @@ mod tests {
 
     #[test]
     fn make_rectangle() {
-        GraphicsPrimitive::Rectangle {
+        GeometricPrimitive::Rectangle {
             data: RectangleData {
                 left: 100,
                 top: 50,
@@ -101,7 +101,7 @@ mod tests {
 
     #[test]
     fn make_ellipse() {
-        GraphicsPrimitive::Ellipse {
+        GeometricPrimitive::Ellipse {
             data: EllipseData {
                 cx: 60,
                 cy: 70,
@@ -117,7 +117,7 @@ mod tests {
 
     #[test]
     fn make_line() {
-        GraphicsPrimitive::Line {
+        GeometricPrimitive::Line {
             data: LineData {
                 x1: 1,
                 y1: 2,
@@ -133,7 +133,7 @@ mod tests {
 
     #[test]
     fn make_text() {
-        GraphicsPrimitive::Text {
+        GeometricPrimitive::Text {
             data: TextData {
                 x: 900,
                 y: 1000,
@@ -148,7 +148,7 @@ mod tests {
 
     #[test]
     fn make_polygon() {
-        GraphicsPrimitive::Polygon {
+        GeometricPrimitive::Polygon {
             points: vec![
                 Point { x: 4, y: 41 },
                 Point { x: 5, y: 45 }
@@ -161,7 +161,7 @@ mod tests {
 
     #[test]
     fn make_path() {
-        GraphicsPrimitive::RuPath {
+        GeometricPrimitive::RuPath {
             data: PathData {
                 start_x: 10,
                 start_y: 20,

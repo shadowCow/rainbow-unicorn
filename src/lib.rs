@@ -16,26 +16,26 @@ pub trait Painter {
     fn draw_path(&self, data: &PathData, styles: &Styles);
 }
 
-fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GraphicsPrimitive>) {
+fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GeometricPrimitive>) {
     painter.clear();
     for gp in graphics_primitives.iter() {
         match gp {
-            GraphicsPrimitive::Rectangle { data, styles } => {
+            GeometricPrimitive::Rectangle { data, styles } => {
                 painter.draw_rect(data, styles);
             }
-            GraphicsPrimitive::Line { data, styles } => {
+            GeometricPrimitive::Line { data, styles } => {
                 painter.draw_line(data, styles);
             }
-            GraphicsPrimitive::Ellipse { data, styles } => {
+            GeometricPrimitive::Ellipse { data, styles } => {
                 painter.draw_ellipse(data, styles);
             }
-            GraphicsPrimitive::Text { data, styles } => {
+            GeometricPrimitive::Text { data, styles } => {
                 painter.draw_text(data, styles);
             }
-            GraphicsPrimitive::Polygon { points, styles } => {
+            GeometricPrimitive::Polygon { points, styles } => {
                 painter.draw_polygon(points, styles);
             }
-            GraphicsPrimitive::RuPath { data, styles } => {
+            GeometricPrimitive::RuPath { data, styles } => {
                 painter.draw_path(data, styles);
             }
         }
@@ -43,7 +43,7 @@ fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GraphicsPrimitive>) 
 }
 
 pub trait StateContainer {
-    fn update(&self, timestamp_millis: f64) -> Vec<GraphicsPrimitive>;
+    fn update(&self, timestamp_millis: f64) -> Vec<GeometricPrimitive>;
 }
 
 pub fn tick<T: StateContainer, P: Painter>(
@@ -72,7 +72,7 @@ mod tests {
 
     struct MockStateContainer {}
     impl StateContainer for MockStateContainer {
-        fn update(&self, timestamp_millis: f64) -> Vec<GraphicsPrimitive> {
+        fn update(&self, timestamp_millis: f64) -> Vec<GeometricPrimitive> {
             vec![]
         }
     }
