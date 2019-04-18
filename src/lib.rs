@@ -4,7 +4,6 @@ pub mod primitives;
 use primitives::*;
 
 pub mod timelines;
-use timelines::*;
 
 pub trait Painter {
     fn clear(&self);
@@ -16,7 +15,7 @@ pub trait Painter {
     fn draw_path(&self, data: &PathData, styles: &Styles);
 }
 
-fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GeometricPrimitive>) {
+pub fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GeometricPrimitive>) {
     painter.clear();
     for gp in graphics_primitives.iter() {
         match gp {
