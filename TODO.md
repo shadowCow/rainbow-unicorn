@@ -1,5 +1,7 @@
 # Todo
 
+#### styles should support fill AND/OR stroke - not just OR
+
 #### handle input events
 we need to define what the input events will be.
 it needs to be cross platform, so we need some abstractions that span platforms.
