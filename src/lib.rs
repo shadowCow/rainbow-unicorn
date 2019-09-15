@@ -15,34 +15,34 @@ pub trait Painter {
     fn draw_path(&self, data: &PathData, styles: &Styles);
 }
 
-pub fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<GeometricPrimitive>) {
+pub fn paint<T: Painter>(painter: &T, graphics_primitives: &Vec<StyledGeometricPrimitive>) {
     painter.clear();
     for gp in graphics_primitives.iter() {
-        match gp {
-            GeometricPrimitive::Rectangle { data, styles } => {
-                painter.draw_rect(data, styles);
+        match &gp.primitive {
+            GeometricPrimitive::Rectangle { data } => {
+                painter.draw_rect(&data, &gp.styles);
             }
-            GeometricPrimitive::Line { data, styles } => {
-                painter.draw_line(data, styles);
+            GeometricPrimitive::Line { data } => {
+                painter.draw_line(&data, &gp.styles);
             }
-            GeometricPrimitive::Ellipse { data, styles } => {
-                painter.draw_ellipse(data, styles);
+            GeometricPrimitive::Ellipse { data } => {
+                painter.draw_ellipse(&data, &gp.styles);
             }
-            GeometricPrimitive::Text { data, styles } => {
-                painter.draw_text(data, styles);
+            GeometricPrimitive::Text { data } => {
+                painter.draw_text(&data, &gp.styles);
             }
-            GeometricPrimitive::Polygon { points, styles } => {
-                painter.draw_polygon(points, styles);
+            GeometricPrimitive::Polygon { points } => {
+                painter.draw_polygon(&points, &gp.styles);
             }
-            GeometricPrimitive::RuPath { data, styles } => {
-                painter.draw_path(data, styles);
+            GeometricPrimitive::RuPath { data } => {
+                painter.draw_path(&data, &gp.styles);
             }
         }
     }
 }
 
 pub trait StateContainer {
-    fn update(&self, timestamp_millis: f64) -> Vec<GeometricPrimitive>;
+    fn update(&self, timestamp_millis: f64) -> Vec<StyledGeometricPrimitive>;
 }
 
 pub fn tick<T: StateContainer, P: Painter>(
@@ -71,7 +71,7 @@ mod tests {
 
     struct MockStateContainer {}
     impl StateContainer for MockStateContainer {
-        fn update(&self, timestamp_millis: f64) -> Vec<GeometricPrimitive> {
+        fn update(&self, timestamp_millis: f64) -> Vec<StyledGeometricPrimitive> {
             vec![]
         }
     }
